@@ -55,7 +55,7 @@ function unpauseCountdown() {
 }
 
 function startCountdown() {
-    targetDate = new Date().getTime() + (1000 * 60 * 25);
+    targetDate = new Date().getTime() + (1000 * 60 * 1.1);
     updateCountdown();
 }
 
@@ -71,11 +71,18 @@ function updateCountdown() {
         timeLeft = targetDate - now;
 
         // Calculate minutes, and seconds
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.max(0, Math.ceil((timeLeft % (1000 * 60)) / 1000));
+        let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.max(0, Math.ceil((timeLeft % (1000 * 60)) / 1000));
+
+        if (seconds >= 60) {
+            seconds = seconds - 60;
+            minutes++;
+        }
+
+        const paddedSeconds = String(seconds).padStart(2, '0');
 
         // Display the result in the countdown div
-        document.getElementById("countdownText").innerHTML = minutes + ":" + seconds;
+        document.getElementById("countdownText").innerHTML = minutes + ":" + paddedSeconds;
 
         // Check if the countdown has ended
         if (timeLeft > 0) {
