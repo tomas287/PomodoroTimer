@@ -55,7 +55,7 @@ function unpauseCountdown() {
 }
 
 function startCountdown() {
-    targetDate = new Date().getTime() + (1000 * 60 * 1.1);
+    targetDate = new Date().getTime() + (1000 * 60 * 25);
     updateCountdown();
 }
 
