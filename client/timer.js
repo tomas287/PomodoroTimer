@@ -19,9 +19,9 @@ const pauseButton = document.getElementById('pause');
 
 let currentMode = POMODORO;
 let modes = {
-    [POMODORO]: .1,
-    [SHORT_BREAK]: .1,
-    [LONG_BREAK]: .5
+    [POMODORO]: 25,
+    [SHORT_BREAK]: 5,
+    [LONG_BREAK]: 15
 };
 
 
@@ -141,7 +141,6 @@ function updateCountdown() {
         if (timeLeft > 0) {
             setTimeout(updateCountdown, 1000); // Call updateCountdown again after 1 second
         } else {
-            console.log(consecutivePomodoros);
             if (currentMode == POMODORO)
                 if (consecutivePomodoros == 4)
                     startLongBreak();
