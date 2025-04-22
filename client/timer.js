@@ -1,11 +1,28 @@
+const POMODORO = "pomodoro";
+const SHORT_BREAK = "shortBreak";
+const LONG_BREAK = "longBreak";
+const SHORT_BREAK_MSG = "It's time to take a short break.";
+const LONG_BREAK_MSG = "It's time to take a longer break.";
+const POMODORO_MSG = "It's time to focus.";
+
+
 let targetDate;
 let timeLeft = 0;
 let timeLeftWhenPaused;
 let isItPaused = false;
+let consecutivePomodoros = 0;
+
 
 const startButton = document.getElementById('start');
 const restartButton = document.getElementById('restart');
 const pauseButton = document.getElementById('pause');
+
+let currentMode = POMODORO;
+let modes = {
+    [POMODORO]: .1,
+    [SHORT_BREAK]: .1,
+    [LONG_BREAK]: .5
+};
 
 
 startButton.addEventListener('click', () => {
@@ -14,8 +31,12 @@ startButton.addEventListener('click', () => {
     if (timeLeft > 0 ) {
         resumeCountdown();
     }
-    else
+    else {
+        if (currentMode == POMODORO)
+            consecutivePomodoros++;
+
         startCountdown();
+    }
   });
 
 restartButton.addEventListener('click', () => {
@@ -46,6 +67,12 @@ function showStartButton() {
     restartButton.style.display = "flex";
 }
 
+function showInitialButton() {
+    startButton.style.display = "flex";
+    pauseButton.style.display = "none";
+    restartButton.style.display = "none";
+}
+
 function pauseCountdown() {
     isItPaused = true;
 }
@@ -54,8 +81,34 @@ function unpauseCountdown() {
     isItPaused = false;
 }
 
+function startShortBreak() {
+    currentMode = SHORT_BREAK;
+    pauseCountdown();
+    showInitialButton();
+    document.getElementById("pomodoroText").innerHTML = SHORT_BREAK_MSG;
+    document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
+}
+
+function startLongBreak() {
+    currentMode = LONG_BREAK;
+    consecutivePomodoros = 0;
+    pauseCountdown();
+    showInitialButton();
+    document.getElementById("pomodoroText").innerHTML = LONG_BREAK_MSG;
+    document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
+}
+
+function startPomodoro() {
+    currentMode = POMODORO;
+    pauseCountdown();
+    showInitialButton();
+    document.getElementById("pomodoroText").innerHTML = POMODORO_MSG;
+    document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
+}
+
 function startCountdown() {
-    targetDate = new Date().getTime() + (1000 * 60 * 25);
+    // targetDate = new Date().getTime() + (1000 * 60 * 25);
+    targetDate = new Date().getTime() + (1000 * 60 * modes[currentMode]);
     updateCountdown();
 }
 
@@ -88,7 +141,16 @@ function updateCountdown() {
         if (timeLeft > 0) {
             setTimeout(updateCountdown, 1000); // Call updateCountdown again after 1 second
         } else {
-            document.getElementById("countdown").innerHTML = "The event has started!";
+            console.log(consecutivePomodoros);
+            if (currentMode == POMODORO)
+                if (consecutivePomodoros == 4)
+                    startLongBreak();
+                else
+                    startShortBreak();
+            else
+                startPomodoro();
         }
     }
 }
+
+window.onload = startPomodoro();

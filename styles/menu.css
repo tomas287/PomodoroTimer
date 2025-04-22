@@ -1,0 +1,4 @@
+nav#menuNavbar.navbar.navbar-dark.bg-dark {
+    display: flex !important;
+    align-items: baseline !important;
+}
