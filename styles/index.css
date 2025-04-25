@@ -1,6 +1,13 @@
 body {
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+}
+
+#content {
+    min-height: 100vh; /* Take at least full screen */
+    width: 100%;
+    padding: 2rem;
 }

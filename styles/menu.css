@@ -2,3 +2,39 @@ nav#menuNavbar.navbar.navbar-dark.bg-dark {
     display: flex !important;
     align-items: baseline !important;
 }
+
+img.functionalitiesIcons {
+    height: 1.4rem; 
+    margin-right: 20px;
+}
+
+.features {
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    border: 2px solid transparent !important;
+    padding-right: 50px;
+}
+
+.features:hover {
+    padding-left: 4px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.181);
+    border: 2px solid transparent !important;
+}
+
+#modes {
+    color: white;
+    font-weight: 600;
+}
+
+.miniMenu {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid white;
+}

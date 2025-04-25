@@ -1,0 +1,15 @@
+header {
+    margin-bottom: 20px;
+}
+
+.clickable-area {
+    cursor: pointer;
+    transition: transform 0.3s ease, font-size 0.3s ease; /* Smooth scaling */
+}
+
+.clickable-logo:hover {
+    cursor: pointer;
+    transform: scale(1.05); /* Scale up */
+    font-size: 1.1rem;
+    text-shadow: 0 0 5px #919191;
+}
