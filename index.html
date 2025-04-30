@@ -22,15 +22,15 @@
                 </div>
             </header>
 
-            <div style="display: flex; align-items: center;">
+            <div style="display: flex; align-items: baseline;">
                 <div class="pos-f-t">
                     <div class="nav flex-column nav-tabs" id="v-pills-tab" role="tabslist" aria-orientation="vertical" style="width: fit-content !important; border-bottom: none;">
-                        <div class="miniMenu">
+                        <!-- <div class="miniMenu">
                             <a class="nav-link features" href="#" id="home"><img src="images/home.png" class="functionalitiesIcons">Home</a>
-                        </div>
-                        <div class="miniMenu">
+                        </div> -->
+                        <div id="modesMenu" class="miniMenu">
                             <a class="nav-link disabled features" href="#" id="modes">Modes</a>
-                            <a class="nav-link features" href="#" id="pomodoro"><img src="images/pomodoro.png" class="functionalitiesIcons">Pomodoro</a>
+                            <a class="nav-link features active" href="#" id="pomodoro"><img src="images/pomodoro.png" class="functionalitiesIcons">Pomodoro</a>
                             <a class="nav-link features" href="#" id="shortBreak"><img src="images/coffeeTimeWhite.png" class="functionalitiesIcons">Short Break</a>
                             <a class="nav-link features" href="#" id="longBreak"><img src="images/alarm-clock.png" class="functionalitiesIcons">Long Break</a>
                         </div>
@@ -40,11 +40,12 @@
                         </div>                    
                     </div>
                 </div>
+
         
                 <div>
-                    <div id="countdown" style="position: absolute; left: 50%; transform: translateX(-50%);">
+                    <div id="countdown" style="position: absolute; left: 50%; transform: translateX(-50%); border-radius: 10px; background-color: rgba(255, 255, 255, 0.082); padding-top: 15px; padding-bottom: 15px; padding-left: 50px; padding-right: 50px;">
                         <h3 id="pomodoroText">Focus Time</h3>
-                        <h2 id="countdownText">25:00</h2>
+                        <h1 id="countdownText">25:00</h1>
                         <div id="buttons">
                             <button type="button" id="start" class="btn btn-light">Start</button>
                             <button type="button" id="pause" class="btn btn-light">Pause</button>

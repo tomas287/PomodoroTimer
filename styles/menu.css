@@ -38,3 +38,8 @@ img.functionalitiesIcons {
     padding-bottom: 4px;
     border-bottom: 1px solid white;
 }
+
+.nav-link.active {
+    background-color: #198754 !important; /* e.g., Bootstrap's success green */
+    color: white !important;
+  }

@@ -5,7 +5,6 @@ const SHORT_BREAK_MSG = "It's time to take a short break.";
 const LONG_BREAK_MSG = "It's time to take a longer break.";
 const POMODORO_MSG = "It's time to focus.";
 
-
 let targetDate;
 let timeLeft = 0;
 let timeLeftWhenPaused;
@@ -17,6 +16,11 @@ const startButton = document.getElementById('start');
 const restartButton = document.getElementById('restart');
 const pauseButton = document.getElementById('pause');
 
+const navContainer = document.getElementById('modesMenu');
+const pomodoroButton = document.getElementById('pomodoro');
+const shortBreakButton = document.getElementById('shortBreak');
+const longBreakButton = document.getElementById('longBreak');
+
 let currentMode = POMODORO;
 let modes = {
     [POMODORO]: 25,
@@ -24,6 +28,26 @@ let modes = {
     [LONG_BREAK]: 15
 };
 
+pomodoroButton.addEventListener('click' ,function (e) {
+    if (currentMode != POMODORO) {
+        makeButtonActive(this);
+        startPomodoro();
+    }
+});
+
+shortBreakButton.addEventListener('click' ,function (e) {
+    if (currentMode != SHORT_BREAK) {
+        makeButtonActive(this);
+        startShortBreak();
+    }
+});
+
+longBreakButton.addEventListener('click' ,function (e) {
+    if (currentMode != LONG_BREAK) {
+        makeButtonActive(this);
+        startLongBreak();
+    }
+});
 
 startButton.addEventListener('click', () => {
     unpauseCountdown();
@@ -150,6 +174,11 @@ function updateCountdown() {
                 startPomodoro();
         }
     }
+}
+
+function makeButtonActive (button) {
+    navContainer.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
+    button.classList.add('active');
 }
 
 window.onload = startPomodoro();
