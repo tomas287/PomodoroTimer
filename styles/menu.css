@@ -14,7 +14,7 @@ img.functionalitiesIcons {
     padding-left: 4px;
     padding-top: 10px;
     padding-bottom: 10px;
-    color: white;
+    color: var(--text-color);
     border: 2px solid transparent !important;
     padding-right: 50px;
 }
@@ -23,23 +23,23 @@ img.functionalitiesIcons {
     padding-left: 4px;
     padding-top: 10px;
     padding-bottom: 10px;
-    color: rgb(255, 255, 255);
-    background: rgba(255, 255, 255, 0.181);
+    color: var(--text-color);
+    background: var(--features-hover-bg);
     border: 2px solid transparent !important;
 }
 
 #modes {
-    color: white;
+    color: var(--text-color);
     font-weight: 600;
 }
 
 .miniMenu {
     padding-top: 4px;
     padding-bottom: 4px;
-    border-bottom: 1px solid white;
+    border-bottom: var(--bottom-line-color)
 }
 
 .nav-link.active {
     background-color: #198754 !important; /* e.g., Bootstrap's success green */
-    color: white !important;
+    color: var(--text-color) !important;
   }

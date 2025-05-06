@@ -109,6 +109,7 @@ function startShortBreak() {
     currentMode = SHORT_BREAK;
     pauseCountdown();
     showInitialButton();
+    giveShortBreakColors();
     document.getElementById("pomodoroText").innerHTML = SHORT_BREAK_MSG;
     document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
 }
@@ -118,6 +119,7 @@ function startLongBreak() {
     consecutivePomodoros = 0;
     pauseCountdown();
     showInitialButton();
+    giveLongBreakColors();
     document.getElementById("pomodoroText").innerHTML = LONG_BREAK_MSG;
     document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
 }
@@ -126,6 +128,7 @@ function startPomodoro() {
     currentMode = POMODORO;
     pauseCountdown();
     showInitialButton();
+    givePomodoroColors();
     document.getElementById("pomodoroText").innerHTML = POMODORO_MSG;
     document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
 }
@@ -179,6 +182,18 @@ function updateCountdown() {
 function makeButtonActive (button) {
     navContainer.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
     button.classList.add('active');
+}
+
+function givePomodoroColors() {
+    document.documentElement.setAttribute("data-theme", "default");
+}
+
+function giveShortBreakColors() {
+    document.documentElement.setAttribute("data-theme", SHORT_BREAK);
+}
+
+function giveLongBreakColors() {
+    document.documentElement.setAttribute("data-theme", LONG_BREAK);
 }
 
 window.onload = startPomodoro();

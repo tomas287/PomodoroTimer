@@ -1,0 +1,42 @@
+* {
+    transition: all 0.5s ease !important; /* Ensure all properties transition */
+  }
+
+/* Base theme variables */
+:root {
+    --bg-color: rgb(33, 37, 41);
+    --text-color: rgb(255, 255, 255);
+    --features-hover-bg: rgba(255, 255, 255, 0.181);
+    --bottom-line-color: 1px solid white;
+}
+
+/* Short break colors */
+[data-theme="shortBreak"] {
+    --bg-color: rgb(186, 186, 186);
+    --text-color: rgb(0, 0, 0);
+    --features-hover-bg: rgb(150, 65, 160);
+    --bottom-line-color: 1px solid black;
+}
+  
+/* Long break colors */
+[data-theme="longBreak"] {
+    --bg-color: rgb(80, 48, 48);
+    --text-color: rgb(0, 0, 0);
+    --features-hover-bg: rgb(150, 65, 160);
+    --bottom-line-color: 1px solid black;
+}
+
+.themed-box {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* No inversion for light mode */
+.functionalitiesIcons {
+    transition: filter 0.5s ease;
+  }
+
+[data-theme="shortBreak"] .functionalitiesIcons,
+[data-theme="longBreak"] .functionalitiesIcons {
+    filter: invert(1); /* Invert colors for dark and blackout modes */
+}
