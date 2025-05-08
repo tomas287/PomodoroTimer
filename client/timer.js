@@ -105,9 +105,15 @@ function unpauseCountdown() {
     isItPaused = false;
 }
 
+function resetCountdown() {
+    timeLeft = 0;
+    timeLeftWhenPaused = 0;
+}
+
 function startShortBreak() {
     currentMode = SHORT_BREAK;
     pauseCountdown();
+    resetCountdown();
     showInitialButton();
     giveShortBreakColors();
     document.getElementById("pomodoroText").innerHTML = SHORT_BREAK_MSG;
@@ -118,6 +124,7 @@ function startLongBreak() {
     currentMode = LONG_BREAK;
     consecutivePomodoros = 0;
     pauseCountdown();
+    resetCountdown();
     showInitialButton();
     giveLongBreakColors();
     document.getElementById("pomodoroText").innerHTML = LONG_BREAK_MSG;
@@ -127,6 +134,7 @@ function startLongBreak() {
 function startPomodoro() {
     currentMode = POMODORO;
     pauseCountdown();
+    resetCountdown();
     showInitialButton();
     givePomodoroColors();
     document.getElementById("pomodoroText").innerHTML = POMODORO_MSG;
