@@ -10,6 +10,8 @@
     --bottom-line-color: 1px solid white;
     --selected-mode: rgb(25, 135, 84);
     --btn-color:rgb(33,37,41);
+    --scroll-btn-color: rgb(33, 37, 41, 0.85);
+    --scroll-btn-hover: rgb(33, 37, 41);
 }
 
 /* Short break colors */
@@ -21,6 +23,8 @@
     --bottom-line-color: 1px solid white;
     --selected-mode: rgb(46, 102, 50);
     --btn-color: rgb(46, 102, 50);
+    --scroll-btn-color: rgb(56, 128, 62, 0.9);
+    --scroll-btn-hover: rgb(46, 102, 50);
 }
   
 /* Long break colors */
@@ -31,6 +35,8 @@
     --bottom-line-color: 1px solid white;
     --selected-mode: rgb(124, 47, 47);
     --btn-color: rgb(124, 47, 47);
+    --scroll-btn-color: rgb(153, 58, 58, 0.9);
+    --scroll-btn-hover: rgb(153, 58, 58);
 }
 
 .themed-box {

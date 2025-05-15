@@ -5,7 +5,7 @@
     align-items: center;
     height: 40px;
     width: 40px;
-    background-color: green;
+    background-color: var(--scroll-btn-color);
     border-radius: 50px;
     border: none;
     margin-top: 100px;
@@ -19,7 +19,7 @@
 
 #scrollToTopButton:hover {
     cursor: pointer;
-    box-shadow: 0 0 8px #919191;
+    background-color: var(--scroll-btn-hover);
 }
 
 #scrollToTopButton img {
