@@ -40,6 +40,6 @@ img.functionalitiesIcons {
 }
 
 .nav-link.active {
-    background-color: #198754 !important; /* e.g., Bootstrap's success green */
+    background-color: var(--selected-mode) !important; /* e.g., Bootstrap's success green */
     color: var(--text-color) !important;
   }

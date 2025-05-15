@@ -1,9 +1,9 @@
 const POMODORO = "pomodoro";
 const SHORT_BREAK = "shortBreak";
 const LONG_BREAK = "longBreak";
-const SHORT_BREAK_MSG = "It's time to take a short break.";
-const LONG_BREAK_MSG = "It's time to take a longer break.";
-const POMODORO_MSG = "It's time to focus.";
+const SHORT_BREAK_MSG = "Time to take a short break.";
+const LONG_BREAK_MSG = "Time to take a long break.";
+const POMODORO_MSG = "Time to focus on your work.";
 
 let targetDate;
 let timeLeft = 0;
