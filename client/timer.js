@@ -9,7 +9,9 @@ let targetDate;
 let timeLeft = 0;
 let timeLeftWhenPaused;
 let isItPaused = false;
-let consecutivePomodoros = 0;
+let pomodorosCounter = 1;
+let pomodorosBeforeLongBreak = 4;
+let currentCyclePomodoros = 0;
 
 
 const startButton = document.getElementById('start');
@@ -23,28 +25,25 @@ const longBreakButton = document.getElementById('longBreak');
 
 let currentMode = POMODORO;
 let modes = {
-    [POMODORO]: 25,
-    [SHORT_BREAK]: 5,
-    [LONG_BREAK]: 15
+    [POMODORO]: 0.1,
+    [SHORT_BREAK]: 0.1,
+    [LONG_BREAK]: .1
 };
 
 pomodoroButton.addEventListener('click' ,function (e) {
     if (currentMode != POMODORO) {
-        makeButtonActive(this);
         startPomodoro();
     }
 });
 
 shortBreakButton.addEventListener('click' ,function (e) {
     if (currentMode != SHORT_BREAK) {
-        makeButtonActive(this);
         startShortBreak();
     }
 });
 
 longBreakButton.addEventListener('click' ,function (e) {
     if (currentMode != LONG_BREAK) {
-        makeButtonActive(this);
         startLongBreak();
     }
 });
@@ -56,9 +55,6 @@ startButton.addEventListener('click', () => {
         resumeCountdown();
     }
     else {
-        if (currentMode == POMODORO)
-            consecutivePomodoros++;
-
         startCountdown();
     }
   });
@@ -111,6 +107,7 @@ function resetCountdown() {
 }
 
 function startShortBreak() {
+    makeButtonActive(shortBreakButton);
     currentMode = SHORT_BREAK;
     pauseCountdown();
     resetCountdown();
@@ -118,20 +115,52 @@ function startShortBreak() {
     giveShortBreakColors();
     document.getElementById("pomodoroText").innerHTML = SHORT_BREAK_MSG;
     document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
+
+    console.log(((pomodorosCounter - 1) % pomodorosBeforeLongBreak))
+
+    if ((pomodorosCounter - 1) == 0)
+        document.getElementById("pomodoroInfo").innerHTML = "<h6>No pomodoros completed.</h6>\n"
+        +"Looks like you haven't finished any pomodoros yet. Time to get back to work.";
+    else if (currentCyclePomodoros == 0)
+        document.getElementById("pomodoroInfo").innerHTML = "<h6>Break time's over.</h6>\n"
+        +"You already took a long break for the last cycle. Let's get back to work!";
+    else if (((pomodorosCounter - 1) % pomodorosBeforeLongBreak) != 0)
+        document.getElementById("pomodoroInfo").innerHTML = "<h6>Time for a " + modes[currentMode] + "-minute break.</h6>\n"
+        +"You've completed " + (pomodorosCounter - 1)%4 + " out of " + pomodorosBeforeLongBreak + " pomodoros. Enjoy your short break!";
+    else
+       document.getElementById("pomodoroInfo").innerHTML = "<h6>Well done.</h6>\n"
+        +"That's " + (pomodorosCounter - 1) + " pomodoros down. Take that longer break!"; 
+    
 }
 
 function startLongBreak() {
+    makeButtonActive(longBreakButton);
     currentMode = LONG_BREAK;
-    consecutivePomodoros = 0;
     pauseCountdown();
     resetCountdown();
     showInitialButton();
     giveLongBreakColors();
     document.getElementById("pomodoroText").innerHTML = LONG_BREAK_MSG;
     document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
+
+    
+    if ((pomodorosCounter - 1) == 0)
+        document.getElementById("pomodoroInfo").innerHTML = "<h6>No pomodoros completed.</h6>\n"
+        +"Looks like you haven't finished any pomodoros yet. Time to get back to work.";
+    else if (currentCyclePomodoros == 0)
+        document.getElementById("pomodoroInfo").innerHTML = "<h6>Break time's over.</h6>\n"
+        +"You already took a long break for the last cycle. Let's get back to work!";
+    else if (((pomodorosCounter - 1) % pomodorosBeforeLongBreak) != 0)
+        document.getElementById("pomodoroInfo").innerHTML = "<h6>Almost there.</h6>\n"
+        +"You've completed " + (pomodorosCounter - 1)%4 + " out of " + pomodorosBeforeLongBreak + " pomodoros. Long break comes later — take a shorter break or keep going!";
+    else
+        document.getElementById("pomodoroInfo").innerHTML = "<h6>Time for a " + modes[currentMode] + "-minute break.</h6>\n"
+        +"You've completed <b>" + (pomodorosCounter - 1) + " out of " + pomodorosBeforeLongBreak + "</b> pomodoros. Enjoy your well-deserved long break!";
+
 }
 
 function startPomodoro() {
+    makeButtonActive(pomodoroButton);
     currentMode = POMODORO;
     pauseCountdown();
     resetCountdown();
@@ -139,6 +168,13 @@ function startPomodoro() {
     givePomodoroColors();
     document.getElementById("pomodoroText").innerHTML = POMODORO_MSG;
     document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
+
+    if ((pomodorosCounter%4) == 0)
+        document.getElementById("pomodoroInfo").innerHTML = "<h6>Pomodoro #" + pomodorosCounter + "</h6>"
+        + "Last pomodoro before your long break!";
+    else
+        document.getElementById("pomodoroInfo").innerHTML = "<h6>Pomodoro #" + pomodorosCounter + "</h6>"
+            + pomodorosCounter%4 + " out of " + pomodorosBeforeLongBreak + " pomodoros until your long break.";
 }
 
 function startCountdown() {
@@ -176,13 +212,20 @@ function updateCountdown() {
         if (timeLeft > 0) {
             setTimeout(updateCountdown, 1000); // Call updateCountdown again after 1 second
         } else {
-            if (currentMode == POMODORO)
-                if (consecutivePomodoros == 4)
+            if (currentMode == POMODORO) {
+                currentCyclePomodoros++;
+                pomodorosCounter++;
+                if (((pomodorosCounter - 1) % pomodorosBeforeLongBreak) == 0)
                     startLongBreak();
                 else
                     startShortBreak();
-            else
+            }
+            else {
+                if (currentMode == LONG_BREAK)
+                    currentCyclePomodoros = 0;
+                
                 startPomodoro();
+            }
         }
     }
 }
