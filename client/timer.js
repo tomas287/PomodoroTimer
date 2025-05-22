@@ -25,9 +25,9 @@ const longBreakButton = document.getElementById('longBreak');
 
 let currentMode = POMODORO;
 let modes = {
-    [POMODORO]: 0.1,
-    [SHORT_BREAK]: 0.1,
-    [LONG_BREAK]: .1
+    [POMODORO]: 25,
+    [SHORT_BREAK]: 5,
+    [LONG_BREAK]: 15
 };
 
 pomodoroButton.addEventListener('click' ,function (e) {
