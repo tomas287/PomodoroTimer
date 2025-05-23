@@ -2,3 +2,19 @@
     margin-bottom: 10px;
     border: 1px solid red;
 }
+
+.questionTitle {
+    color: var(--bg-color);
+}
+
+#faq b {
+    color: var(--bg-color);
+}
+
+#faq i {
+    color: var(--bg-color);
+}
+
+#faq a {
+    color: var(--hyperlink-color);
+}

@@ -12,6 +12,7 @@
     --btn-color:rgb(33,37,41);
     --scroll-btn-color: rgb(33, 37, 41, 0.85);
     --scroll-btn-hover: rgb(33, 37, 41);
+    --hyperlink-color: rgb(129, 129, 129);
 }
 
 /* Short break colors */
@@ -25,6 +26,7 @@
     --btn-color: rgb(46, 102, 50);
     --scroll-btn-color: rgb(56, 128, 62, 0.9);
     --scroll-btn-hover: rgb(46, 102, 50);
+    --hyperlink-color: rgb(56, 128, 62);
 }
   
 /* Long break colors */
@@ -37,6 +39,7 @@
     --btn-color: rgb(124, 47, 47);
     --scroll-btn-color: rgb(153, 58, 58, 0.9);
     --scroll-btn-hover: rgb(153, 58, 58);
+    --hyperlink-color: rgb(153, 58, 58);
 }
 
 .themed-box {

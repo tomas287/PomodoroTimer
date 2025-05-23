@@ -40,7 +40,7 @@
                         </div>
                         <div class="miniMenu">
                             <a class="nav-link features" href="#" id="settings"><img src="images/settingsWhite.png" class="functionalitiesIcons">Settings</a>                        
-                            <a class="nav-link features" href="#faq" id="faq"><img src="images/faq.png" class="functionalitiesIcons">FAQ</a>
+                            <a class="nav-link features" href="#faq" id="faqMenu"><img src="images/faq.png" class="functionalitiesIcons">FAQ</a>
                         </div>                    
                     </div>
                 </div>
@@ -64,9 +64,9 @@
             <button id="scrollToTopButton"><img src="images/up-arrow.png" alt=""></button>
         </div>
 
-        <div id="faq" class="text-left d-block w-100" style="padding: 80px;">
+        <div id="faqContainer" class="text-left d-block w-100" style="padding: 80px;">
             <h2>Frequently Asked Questions</h2>
-            <div id="accordion">
+            <div id="faq">
                 <div class="card mb-2">
                     <div class="card-header pl-0 pt-2 pb-2" id="headingOne">
                     <a class="d-block w-100 text-left px-3 py-2"
@@ -75,14 +75,77 @@
                         aria-expanded="true"
                         aria-controls="collapseOne"
                         style="text-decoration: none !important;">
-                        <h5 class="m-0">What is the Pomodoro Technique?</h5>
+                        <h5 class="questionTitle m-0">What is the Pomodoro Technique?</h5>
                     </a>
                     </div>
 
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-                        Your card content goes here...
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faq">
+                        <div class="card-body">
+                            The <b>Pomodoro Technique</b> is a time management method that helps you stay focused and avoid burnout.
+                            It was created by Francesco Cirillo in the late 1980s when he was a university student.
+                            The idea is to tackle tasks in small, focused sprints followed by a quick break.
+                            Each session is called a <i>pomodoro</i> (Italian for "tomato"), inspired by the <a href="https://m.media-amazon.com/images/I/618231U4TbL.jpg" target="_blank" rel="noopener noreferrer">tomato-shaped kitchen timer</a> Cirillo used to keep track of his work. 
+                        </div>
                     </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-header pl-0 pt-2 pb-2" id="headingTwo">
+                    <a class="d-block w-100 text-left px-3 py-2"
+                        data-toggle="collapse"
+                        href="#collapseTwo"
+                        aria-expanded="true"
+                        aria-controls="collapseTwo"
+                        style="text-decoration: none !important;">
+                        <h5 class="questionTitle m-0">How long should a Pomodoro session be?</h5>
+                    </a>
+                    </div>
+
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faq">
+                        <div class="card-body">
+                            Usually, a pomodoro session lasts <b>25 minutes</b>, followed by a <b>5-minute</b> break to recharge.
+                            After completing 4 pomodoros, it's a good idea to take a longer break, usually around <b>15 minutes</b>, to help maintain focus and prevent burnout.
+                            Nevertheless, if you prefer different session lengths, the values can be adjusted in the settings menu.
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-header pl-0 pt-2 pb-2" id="headingThree">
+                    <a class="d-block w-100 text-left px-3 py-2"
+                        data-toggle="collapse"
+                        href="#collapseThree"
+                        aria-expanded="true"
+                        aria-controls="collapseThree"
+                        style="text-decoration: none !important;">
+                        <h5 class="questionTitle m-0">Can I use the Pomodoro Technique for any type of work?</h5>
+                    </a>
+                    </div>
+
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faq">
+                        <div class="card-body">
+                            The Pomodoro Technique was designed to be <b>flexible</b> and <b>adaptable</b>, making it suitable for a wide range of tasks and activities.
+                            You can apply this method to various types of work, such as studying, coding, writing, or other cognitive and creative tasks.
+                            However, some individuals may find that the technique is not well-suited to their work style or preferences.
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-header pl-0 pt-2 pb-2" id="headingFour">
+                    <a class="d-block w-100 text-left px-3 py-2"
+                        data-toggle="collapse"
+                        href="#collapseFour"
+                        aria-expanded="true"
+                        aria-controls="collapseFour"
+                        style="text-decoration: none !important;">
+                        <h5 class="questionTitle m-0">Are there any drawbacks to the Pomodoro technique?</h5>
+                    </a>
+                    </div>
+
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faq">
+                        <div class="card-body">
+                            The Pomodoro Technique can disrupt deep focus by forcing breaks at fixed intervals, which may interrupt momentum, especially during complex tasks. 
+                            It might also not work well in collaborative settings, where team members have different schedules and rhythms.
+                            Therefore, the Pomodoro Technique works best when tasks require a <b>clear routine</b> and <b>timeboxing</b> — especially for solo work, studying, or situations where you need help avoiding distractions and staying on track.
+                        </div>
                     </div>
                 </div>
             </div>
