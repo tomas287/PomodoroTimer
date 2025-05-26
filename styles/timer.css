@@ -21,6 +21,10 @@
     color: var(--text-color);
 }
 
+.timerBtn:hover {
+    color: var(--text-color);
+}
+
 #pomodoroInfo{
     margin-top: 40px;
 }

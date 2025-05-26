@@ -10,7 +10,7 @@ body {
     text-align: center;
 }
 
-#content {
+#mainView, #settingsView {
     min-height: 100vh; /* Take at least full screen */
     width: 100%;
     padding: 2rem;

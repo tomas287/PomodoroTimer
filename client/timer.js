@@ -23,6 +23,12 @@ const pomodoroButton = document.getElementById('pomodoro');
 const shortBreakButton = document.getElementById('shortBreak');
 const longBreakButton = document.getElementById('longBreak');
 
+const settingsButton = document.getElementById('settings');
+const returnButton = document.getElementById('return');
+
+const mainView = document.getElementById("mainView");
+const settingsView = document.getElementById("settingsView");
+
 let currentMode = POMODORO;
 let modes = {
     [POMODORO]: 25,
@@ -69,11 +75,27 @@ restartButton.addEventListener('click', () => {
 });
 
 pauseButton.addEventListener('click', () => {
+    pause();
+});
+
+settingsButton.addEventListener('click', () => {
+    pause();
+
+    mainView.style.display = "none";
+    settingsView.style.display = "block";
+});
+
+returnButton.addEventListener('click', () => {
+    mainView.style.display = "block";
+    settingsView.style.display = "none";
+});
+
+function pause() {
     showStartButton();
     pauseCountdown();
     const now = new Date().getTime();
     timeLeftWhenPaused = targetDate - now;
-});
+}
 
 function showPauseButton() {
     pauseButton.style.display = "flex";

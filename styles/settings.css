@@ -1,0 +1,42 @@
+#settingsOptions {
+    margin-left: 100px;
+    text-align: left;
+}
+
+#timesCustomizationForm {
+    display: flex;
+}
+
+.timesCustomizationLabels {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputTimes {
+    background-color: rgb(33, 37, 41);
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 40%;
+    text-align: center;
+}
+
+.minutesText {
+    color: rgb(171, 171, 171);
+}
+
+.toggleSettings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px !important;
+}
+
+.form-check-input {
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: #28a745; /* Green, for example */
+    border-color: #28a745;
+}

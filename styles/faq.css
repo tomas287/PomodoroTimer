@@ -18,3 +18,7 @@
 #faq a {
     color: var(--hyperlink-color);
 }
+
+.questionHeaders {
+    padding-left: 0px !important;
+}

@@ -39,6 +39,11 @@ img.functionalitiesIcons {
     border-bottom: var(--bottom-line-color)
 }
 
+.miniMenuSettings {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
 .nav-link.active {
     background-color: var(--selected-mode) !important; /* e.g., Bootstrap's success green */
     color: var(--text-color) !important;
