@@ -4,6 +4,10 @@ const LONG_BREAK = "longBreak";
 const SHORT_BREAK_MSG = "Time to take a short break.";
 const LONG_BREAK_MSG = "Time to take a long break.";
 const POMODORO_MSG = "Time to focus on your work.";
+const POMODORO_DEFAULT_DURATION = 25;
+const SHORT_BREAK_DEFAULT_DURATION = 5;
+const LONG_BREAK_DEFAULT_DURATION = 15;
+
 
 let targetDate;
 let timeLeft = 0;
@@ -25,15 +29,19 @@ const longBreakButton = document.getElementById('longBreak');
 
 const settingsButton = document.getElementById('settings');
 const returnButton = document.getElementById('return');
+const saveChangesButton = document.getElementById('saveChangesButton');
 
 const mainView = document.getElementById("mainView");
 const settingsView = document.getElementById("settingsView");
+const faqContainer = document.getElementById("faqContainer");
+
+const inputTimes = document.querySelectorAll('.inputTimes');
 
 let currentMode = POMODORO;
 let modes = {
-    [POMODORO]: 25,
-    [SHORT_BREAK]: 5,
-    [LONG_BREAK]: 15
+    [POMODORO]: POMODORO_DEFAULT_DURATION,
+    [SHORT_BREAK]: SHORT_BREAK_DEFAULT_DURATION,
+    [LONG_BREAK]: LONG_BREAK_DEFAULT_DURATION
 };
 
 pomodoroButton.addEventListener('click' ,function (e) {
@@ -67,9 +75,7 @@ startButton.addEventListener('click', () => {
 
 restartButton.addEventListener('click', () => {
     showPauseButton();
-    timeLeft = 0;
-    timeLeftWhenPaused = 0;
-
+    resetCountdown();
     unpauseCountdown();
     startCountdown();
 });
@@ -82,13 +88,50 @@ settingsButton.addEventListener('click', () => {
     pause();
 
     mainView.style.display = "none";
+    faqContainer.classList.replace('d-block', 'd-none');
     settingsView.style.display = "block";
 });
 
 returnButton.addEventListener('click', () => {
+    if (timeLeft == 0) {
+        showInitialButton();
+    }
+
     mainView.style.display = "block";
+    faqContainer.classList.replace('d-none', 'd-block');
     settingsView.style.display = "none";
 });
+
+saveChangesButton.addEventListener('click', () => {
+    const pomodoroInput = parseFloat(document.getElementById('pomodoroInput').value);
+    const shortBreakInput = parseFloat(document.getElementById('shortBreakInput').value);
+    const longBreakInput = parseFloat(document.getElementById('longBreakInput').value);
+
+    if (currentMode == POMODORO && pomodoroInput != modes[POMODORO])
+        resetCountdown();
+
+    if (currentMode == SHORT_BREAK && shortBreakInput != modes[SHORT_BREAK])
+        resetCountdown();
+
+    if (currentMode == LONG_BREAK && longBreakInput != modes[LONG_BREAK])
+        resetCountdown();
+
+    modes[POMODORO] = pomodoroInput;
+    modes[SHORT_BREAK] = shortBreakInput;
+    modes[LONG_BREAK] = longBreakInput;
+
+    if (timeLeft == 0) {
+        document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
+    }
+});
+
+inputTimes.forEach(input => {
+    input.addEventListener('keydown', function(e) {
+      if (['.', ',', 'e', '-', '+'].includes(e.key)) {
+        e.preventDefault();
+      }
+    });
+  });
 
 function pause() {
     showStartButton();

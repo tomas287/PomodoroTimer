@@ -40,3 +40,12 @@
     background-color: #28a745; /* Green, for example */
     border-color: #28a745;
 }
+
+#saveChangesButton {
+    padding: 10px;
+    border-radius: 20px;
+    border: 0px;
+    background-color: var(--selected-mode);
+    color: white;
+
+}
