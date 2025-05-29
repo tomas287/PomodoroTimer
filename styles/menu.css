@@ -3,6 +3,11 @@ nav#menuNavbar.navbar.navbar-dark.bg-dark {
     align-items: baseline !important;
 }
 
+/* No inversion for light mode */
+.functionalitiesIcons {
+    transition: filter 0.5s ease;
+}
+
 img.functionalitiesIcons {
     height: 1.4rem; 
     margin-right: 20px;
@@ -47,4 +52,4 @@ img.functionalitiesIcons {
 .nav-link.active {
     background-color: var(--selected-mode) !important; /* e.g., Bootstrap's success green */
     color: var(--text-color) !important;
-  }
+}

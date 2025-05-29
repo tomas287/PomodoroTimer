@@ -42,12 +42,15 @@
     --hyperlink-color: rgb(153, 58, 58);
 }
 
-.themed-box {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
-
-/* No inversion for light mode */
-.functionalitiesIcons {
-    transition: filter 0.5s ease;
+/* Settings colors */
+[data-theme="settings"] {
+    --bg-color: rgb(33, 37, 41);
+    --text-color: rgb(255, 255, 255);
+    --features-hover-bg: rgba(255, 255, 255, 0.181);
+    --bottom-line-color: 1px solid white;
+    --selected-mode: rgb(25, 135, 84);
+    --btn-color:rgb(33,37,41);
+    --scroll-btn-color: rgb(33, 37, 41, 0.85);
+    --scroll-btn-hover: rgb(33, 37, 41);
+    --hyperlink-color: rgb(129, 129, 129);
 }

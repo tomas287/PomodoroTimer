@@ -89,21 +89,21 @@
                         <div class="timesCustomizationLabels">
                             <label for="fname"><b>Pomodoro</b></label>
                             <div>
-                                <input id="pomodoroInput" type="number" min="0" value="25" class="inputTimes">
+                                <input id="pomodoroInput" type="number" min="1" value="25" class="inputTimes">
                                 <b class="minutesText">minutes</b>
                             </div>
                         </div>
                         <div class="timesCustomizationLabels">
                             <label for="fname"><b>Short Break</b></label>
                             <div>
-                                <input id="shortBreakInput" type="number" min="0" value="5" class="inputTimes">
+                                <input id="shortBreakInput" type="number" min="1" value="5" class="inputTimes">
                                 <b class="minutesText">minutes</b>
                             </div>
                         </div>
                         <div class="timesCustomizationLabels">
                             <label for="fname"><b>Long Break</b></label>
                             <div>
-                                <input id="longBreakInput" type="number" min="0" value="15" class="inputTimes">
+                                <input id="longBreakInput" type="number" min="1" value="15" class="inputTimes">
                                 <b class="minutesText">minutes</b>
                             </div>
                         </div>
@@ -120,10 +120,10 @@
                     </div><br><br><br>
 
                     <div class="d-flex justify-content-center" >
-                        <button id="saveChangesButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Save Changes</button>
+                        <button id="saveChangesButton" type="button" class="btn btn-primary" data-bs-toggle="modal">Save Changes</button>
                     </div>
 
-                    <div class="modal fade text-black" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade text-black" id="savedChanges" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -132,6 +132,20 @@
                                 </div>
                                 <div class="modal-body">
                                     Your changes have been saved.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade text-black" id="inputError" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Input error</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Time must be at least 1 minute.
                                 </div>
                             </div>
                         </div>
@@ -148,7 +162,7 @@
                 <div class="card mb-2">
                     <div class="card-header pl-0 pt-2 pb-2 questionHeaders" id="headingOne">
                     <a class="d-block w-100 text-left px-3 py-2"
-                        data-toggle="collapse"
+                        data-bs-toggle="collapse"
                         href="#collapseOne"
                         aria-expanded="true"
                         aria-controls="collapseOne"
@@ -157,7 +171,7 @@
                     </a>
                     </div>
 
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faq">
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#faq">
                         <div class="card-body">
                             The <b>Pomodoro Technique</b> is a time management method that helps you stay focused and avoid burnout.
                             It was created by Francesco Cirillo in the late 1980s when he was a university student.
@@ -169,7 +183,7 @@
                 <div class="card mb-2">
                     <div class="card-header pl-0 pt-2 pb-2 questionHeaders" id="headingTwo">
                     <a class="d-block w-100 text-left px-3 py-2"
-                        data-toggle="collapse"
+                        data-bs-toggle="collapse"
                         href="#collapseTwo"
                         aria-expanded="true"
                         aria-controls="collapseTwo"
@@ -178,7 +192,7 @@
                     </a>
                     </div>
 
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faq">
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#faq">
                         <div class="card-body">
                             Usually, a pomodoro session lasts <b>25 minutes</b>, followed by a <b>5-minute</b> break to recharge.
                             After completing 4 pomodoros, it's a good idea to take a longer break, usually around <b>15 minutes</b>, to help maintain focus and prevent burnout.
@@ -189,7 +203,7 @@
                 <div class="card mb-2">
                     <div class="card-header pl-0 pt-2 pb-2 questionHeaders" id="headingThree">
                     <a class="d-block w-100 text-left px-3 py-2"
-                        data-toggle="collapse"
+                        data-bs-toggle="collapse"
                         href="#collapseThree"
                         aria-expanded="true"
                         aria-controls="collapseThree"
@@ -198,7 +212,7 @@
                     </a>
                     </div>
 
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faq">
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#faq">
                         <div class="card-body">
                             The Pomodoro Technique was designed to be <b>flexible</b> and <b>adaptable</b>, making it suitable for a wide range of tasks and activities.
                             You can apply this method to various types of work, such as studying, coding, writing, or other cognitive and creative tasks.
@@ -209,7 +223,7 @@
                 <div class="card mb-2">
                     <div class="card-header pl-0 pt-2 pb-2 questionHeaders" id="headingFour">
                     <a class="d-block w-100 text-left px-3 py-2"
-                        data-toggle="collapse"
+                        data-bs-toggle="collapse"
                         href="#collapseFour"
                         aria-expanded="true"
                         aria-controls="collapseFour"
@@ -218,7 +232,7 @@
                     </a>
                     </div>
 
-                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faq">
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#faq">
                         <div class="card-body">
                             The Pomodoro Technique can disrupt deep focus by forcing breaks at fixed intervals, which may interrupt momentum, especially during complex tasks. 
                             It might also not work well in collaborative settings, where team members have different schedules and rhythms.

@@ -1,12 +1,16 @@
 const POMODORO = "pomodoro";
 const SHORT_BREAK = "shortBreak";
 const LONG_BREAK = "longBreak";
+const SETTINGS = "settings";
 const SHORT_BREAK_MSG = "Time to take a short break.";
 const LONG_BREAK_MSG = "Time to take a long break.";
 const POMODORO_MSG = "Time to focus on your work.";
 const POMODORO_DEFAULT_DURATION = 25;
 const SHORT_BREAK_DEFAULT_DURATION = 5;
 const LONG_BREAK_DEFAULT_DURATION = 15;
+const DEFAULT_AUDIO_SOUND = "/audio/notificationSound.mp3";
+const SAVED_CHANGES_ID = "#savedChanges";
+const INPUT_ERROR_ID = "#inputError";
 
 
 let targetDate;
@@ -16,6 +20,12 @@ let isItPaused = false;
 let pomodorosCounter = 1;
 let pomodorosBeforeLongBreak = 4;
 let currentCyclePomodoros = 0;
+
+let notifications = true;
+let audio = true;
+let audioFile = new Audio(DEFAULT_AUDIO_SOUND);
+audioFile.preload = "auto"; // optional, most browsers do it by default
+audioFile.load(); // ensure it's loaded into memory
 
 
 const startButton = document.getElementById('start');
@@ -86,6 +96,7 @@ pauseButton.addEventListener('click', () => {
 
 settingsButton.addEventListener('click', () => {
     pause();
+    giveSettingsColors();
 
     mainView.style.display = "none";
     faqContainer.classList.replace('d-block', 'd-none');
@@ -97,32 +108,43 @@ returnButton.addEventListener('click', () => {
         showInitialButton();
     }
 
+    giveCurrentModeColors();
+
     mainView.style.display = "block";
     faqContainer.classList.replace('d-none', 'd-block');
     settingsView.style.display = "none";
 });
 
 saveChangesButton.addEventListener('click', () => {
-    const pomodoroInput = parseFloat(document.getElementById('pomodoroInput').value);
-    const shortBreakInput = parseFloat(document.getElementById('shortBreakInput').value);
-    const longBreakInput = parseFloat(document.getElementById('longBreakInput').value);
+    const pomodoroInput = parseInt(document.getElementById('pomodoroInput').value);
+    const shortBreakInput = parseInt(document.getElementById('shortBreakInput').value);
+    const longBreakInput = parseInt(document.getElementById('longBreakInput').value);
 
-    if (currentMode == POMODORO && pomodoroInput != modes[POMODORO])
-        resetCountdown();
+    const allValid = [pomodoroInput, shortBreakInput, longBreakInput].every(t => t > 0 && !isNaN(t));
+    
+    const modalId = allValid ? SAVED_CHANGES_ID : INPUT_ERROR_ID;
 
-    if (currentMode == SHORT_BREAK && shortBreakInput != modes[SHORT_BREAK])
-        resetCountdown();
+    if (allValid) {
+        if (currentMode == POMODORO && pomodoroInput != modes[POMODORO])
+            resetCountdown();
 
-    if (currentMode == LONG_BREAK && longBreakInput != modes[LONG_BREAK])
-        resetCountdown();
+        if (currentMode == SHORT_BREAK && shortBreakInput != modes[SHORT_BREAK])
+            resetCountdown();
 
-    modes[POMODORO] = pomodoroInput;
-    modes[SHORT_BREAK] = shortBreakInput;
-    modes[LONG_BREAK] = longBreakInput;
+        if (currentMode == LONG_BREAK && longBreakInput != modes[LONG_BREAK])
+            resetCountdown();
 
-    if (timeLeft == 0) {
-        document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
+        modes[POMODORO] = pomodoroInput;
+        modes[SHORT_BREAK] = shortBreakInput;
+        modes[LONG_BREAK] = longBreakInput;
+
+        if (timeLeft == 0) {
+            document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
+        }
     }
+
+    const modal = new bootstrap.Modal(document.querySelector(modalId));
+    modal.show();
 });
 
 inputTimes.forEach(input => {
@@ -180,8 +202,6 @@ function startShortBreak() {
     giveShortBreakColors();
     document.getElementById("pomodoroText").innerHTML = SHORT_BREAK_MSG;
     document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
-
-    console.log(((pomodorosCounter - 1) % pomodorosBeforeLongBreak))
 
     if ((pomodorosCounter - 1) == 0)
         document.getElementById("pomodoroInfo").innerHTML = "<h6>No pomodoros completed.</h6>\n"
@@ -277,6 +297,8 @@ function updateCountdown() {
         if (timeLeft > 0) {
             setTimeout(updateCountdown, 1000); // Call updateCountdown again after 1 second
         } else {
+            playAudio();
+
             if (currentMode == POMODORO) {
                 currentCyclePomodoros++;
                 pomodorosCounter++;
@@ -310,6 +332,18 @@ function giveShortBreakColors() {
 
 function giveLongBreakColors() {
     document.documentElement.setAttribute("data-theme", LONG_BREAK);
+}
+
+function giveSettingsColors() {
+    document.documentElement.setAttribute("data-theme", SETTINGS);
+}
+
+function giveCurrentModeColors() {
+    document.documentElement.setAttribute("data-theme", currentMode);
+}
+
+function playAudio() {
+    audioFile.play();
 }
 
 window.onload = startPomodoro();

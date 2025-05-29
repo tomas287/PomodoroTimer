@@ -49,3 +49,8 @@
     color: white;
 
 }
+
+.themed-box {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
