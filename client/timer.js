@@ -21,8 +21,9 @@ let pomodorosCounter = 1;
 let pomodorosBeforeLongBreak = 4;
 let currentCyclePomodoros = 0;
 
-let notifications = true;
-let audio = true;
+let settingsMenuEnabled = false;
+let notificationsEnabled = true;
+let audioEnabled = true;
 let audioFile = new Audio(DEFAULT_AUDIO_SOUND);
 audioFile.preload = "auto"; // optional, most browsers do it by default
 audioFile.load(); // ensure it's loaded into memory
@@ -47,12 +48,31 @@ const faqContainer = document.getElementById("faqContainer");
 
 const inputTimes = document.querySelectorAll('.inputTimes');
 
+const notificationSwitch = document.getElementById('notificationSwitch');
+const audioSwitch = document.getElementById('audioSwitch');
+
 let currentMode = POMODORO;
 let modes = {
     [POMODORO]: POMODORO_DEFAULT_DURATION,
     [SHORT_BREAK]: SHORT_BREAK_DEFAULT_DURATION,
     [LONG_BREAK]: LONG_BREAK_DEFAULT_DURATION
 };
+
+notificationSwitch.addEventListener('change', function () {
+    notificationsEnabled = this.checked;
+});
+
+audioSwitch.addEventListener('change', function () {
+    audioEnabled = this.checked;
+});
+
+document.addEventListener('keydown', function (event) {
+    if (event.key === "Enter") {
+      if (settingsMenuEnabled) {
+        saveChanges();
+      }
+    }
+});
 
 pomodoroButton.addEventListener('click' ,function (e) {
     if (currentMode != POMODORO) {
@@ -97,6 +117,7 @@ pauseButton.addEventListener('click', () => {
 settingsButton.addEventListener('click', () => {
     pause();
     giveSettingsColors();
+    settingsMenuEnabled = !settingsMenuEnabled;
 
     mainView.style.display = "none";
     faqContainer.classList.replace('d-block', 'd-none');
@@ -109,6 +130,7 @@ returnButton.addEventListener('click', () => {
     }
 
     giveCurrentModeColors();
+    settingsMenuEnabled = !settingsMenuEnabled;
 
     mainView.style.display = "block";
     faqContainer.classList.replace('d-none', 'd-block');
@@ -116,35 +138,7 @@ returnButton.addEventListener('click', () => {
 });
 
 saveChangesButton.addEventListener('click', () => {
-    const pomodoroInput = parseInt(document.getElementById('pomodoroInput').value);
-    const shortBreakInput = parseInt(document.getElementById('shortBreakInput').value);
-    const longBreakInput = parseInt(document.getElementById('longBreakInput').value);
-
-    const allValid = [pomodoroInput, shortBreakInput, longBreakInput].every(t => t > 0 && !isNaN(t));
-    
-    const modalId = allValid ? SAVED_CHANGES_ID : INPUT_ERROR_ID;
-
-    if (allValid) {
-        if (currentMode == POMODORO && pomodoroInput != modes[POMODORO])
-            resetCountdown();
-
-        if (currentMode == SHORT_BREAK && shortBreakInput != modes[SHORT_BREAK])
-            resetCountdown();
-
-        if (currentMode == LONG_BREAK && longBreakInput != modes[LONG_BREAK])
-            resetCountdown();
-
-        modes[POMODORO] = pomodoroInput;
-        modes[SHORT_BREAK] = shortBreakInput;
-        modes[LONG_BREAK] = longBreakInput;
-
-        if (timeLeft == 0) {
-            document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
-        }
-    }
-
-    const modal = new bootstrap.Modal(document.querySelector(modalId));
-    modal.show();
+    saveChanges();
 });
 
 inputTimes.forEach(input => {
@@ -297,7 +291,8 @@ function updateCountdown() {
         if (timeLeft > 0) {
             setTimeout(updateCountdown, 1000); // Call updateCountdown again after 1 second
         } else {
-            playAudio();
+            if (audioEnabled)
+                playAudio();
 
             if (currentMode == POMODORO) {
                 currentCyclePomodoros++;
@@ -344,6 +339,40 @@ function giveCurrentModeColors() {
 
 function playAudio() {
     audioFile.play();
+}
+
+function saveChanges() {
+    const pomodoroInput = parseInt(document.getElementById('pomodoroInput').value);
+    const shortBreakInput = parseInt(document.getElementById('shortBreakInput').value);
+    const longBreakInput = parseInt(document.getElementById('longBreakInput').value);
+
+    const allValid = [pomodoroInput, shortBreakInput, longBreakInput].every(t => t > 0 && !isNaN(t));
+    
+    const modalId = allValid ? SAVED_CHANGES_ID : INPUT_ERROR_ID;
+
+    if (allValid) {
+        if (currentMode == POMODORO && pomodoroInput != modes[POMODORO])
+            resetCountdown();
+
+        if (currentMode == SHORT_BREAK && shortBreakInput != modes[SHORT_BREAK])
+            resetCountdown();
+
+        if (currentMode == LONG_BREAK && longBreakInput != modes[LONG_BREAK])
+            resetCountdown();
+
+        modes[POMODORO] = pomodoroInput;
+        modes[SHORT_BREAK] = shortBreakInput;
+        modes[LONG_BREAK] = longBreakInput;
+
+        if (timeLeft == 0) {
+            document.getElementById("countdownText").innerHTML = modes[currentMode] + ":00";
+        }
+    }
+
+    if (notificationsEnabled) {
+        const modal = new bootstrap.Modal(document.querySelector(modalId));
+        modal.show();
+    }
 }
 
 window.onload = startPomodoro();
