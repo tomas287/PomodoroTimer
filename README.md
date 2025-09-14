@@ -1,6 +1,6 @@
 # ⏱️ Pomodoro Timer
 
-A simple and customizable **Pomodoro Timer** built with HTML/JavaScript + Bootstrap.  
+A simple and customizable [**Pomodoro Timer**](https://tomas287.github.io/PomodoroTimer/) built with HTML/JavaScript + Bootstrap.  
 Boost your productivity by working in focused intervals with short breaks in between.
 
 ---
