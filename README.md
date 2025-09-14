@@ -35,9 +35,5 @@ The **Pomodoro Technique** is a time management method:
 
 * Tomas287 – [GitHub Profile](https://github.com/tomas287)
 
-```
-
 ---
 
-⚡ Do you want me to make it **more user-facing** (friendly, like a productivity app landing page) or **developer-facing** (focus on code, setup, and contributing)?
-```
