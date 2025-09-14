@@ -33,7 +33,7 @@ The **Pomodoro Technique** is a time management method:
 
 ## 👤 Author
 
-* Tomas287 – [GitHub Profile](https://github.com/tomas287)
+* Tomás Martins – [GitHub](https://github.com/tomas287)
 
 ---
 
